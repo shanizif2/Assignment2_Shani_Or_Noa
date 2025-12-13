@@ -1,16 +1,13 @@
-/* רק כדי "לראות" את המלבנים כמו בתמונה */
 .box {
   border: 3px solid red;
   background: transparent;
   min-height: 70px;
 }
 
-/* גובה כולל לכל המערכת (כדי שה-sidebar באמת יראה 100%) */
 .layout-root {
-  height: 420px; /* אפשר לשנות לפי מה שמתאים לך */
+  height: 420px; /* כמו שהיה */
 }
 
-/* כל שורה מימין היא בערך שליש גובה */
 .right-area {
   height: 100%;
 }
@@ -19,31 +16,14 @@
   height: calc(100% / 3);
 }
 
-/* שני המלבנים הקטנים בשורה 2 - כל אחד חצי גובה השורה */
+/* שני הקטנים בשורה 2: חצי גובה השורה, עם gap קטן (g-1 ≈ 0.25rem) */
 .half-h {
-  height: calc((100% - 0.5rem) / 2); /* 0.5rem בערך gap קטן */
+  height: calc((100% - 0.25rem) / 2);
 }
 
-/* ✅ הדרישה שלך: מתחת ל-750px הכל אחד מתחת לשני */
+/* מתחת ל-750px: כולם אחד מתחת לשני */
 @media (max-width: 750px) {
-  .layout-root {
-    height: auto;
-  }
-
-  /* כל ה-cols נהיים 100% */
-  .layout-root > [class*="col-"],
-  .right-area > [class*="col-"],
-  .row-h > [class*="col-"] {
-    width: 100% !important;
-    flex: 0 0 100% !important;
-  }
-
-  .row-h {
-    height: auto;
-  }
-
-  .half-h {
-    height: auto;
-    min-height: 70px;
-  }
+  .layout-root { height: auto; }
+  .row-h { height: auto; }
+  .half-h { height: auto; min-height: 70px; }
 }
