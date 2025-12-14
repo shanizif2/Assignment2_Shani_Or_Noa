@@ -1,9 +1,10 @@
 :root{
-  --border: 3px; /* Border thickness */
-  --gap: 14px; /* Spacing between all rectangles */
-  --frame-padding: 10px; /* Padding inside the outer frame */
-  --desktop-height: 420px; /* Total height on desktop */
-  --mobile-box-height: 110px; /* Uniform height for all boxes on mobile */
+  --border: 3px;                /* Border thickness */
+  --gap: 14px;                  /* Spacing between all rectangles */
+  --frame-padding: 10px;        /* Padding inside the outer frame */
+  /* Use a viewport-based height so the layout fills most of the page */
+  --desktop-height: 75vh;       /* Total height on desktop (relative to screen height) */
+  --mobile-box-height: 110px;   /* Uniform height for all boxes on mobile */
 }
 
 *{
@@ -27,7 +28,7 @@
 /* Right area: three equal-height rows */
 .right-area{
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr; /* 33.33% כל שורה */
+  grid-template-rows: 1fr 1fr 1fr; /* Each row is ~33.33% */
   gap: var(--gap);
   height: 100%;
 }
@@ -70,16 +71,19 @@
 
 /* Responsive layout for screens up to 750px */
 @media (max-width: 750px){
-   /* Switch to single-column layout */
+
+  /* Switch to single-column layout */
   .layout{
     grid-template-columns: 1fr;
     height: auto;
   }
-  /* Switch to single-column layout */
+
+  /* Remove fixed row heights on mobile */
   .right-area{
     grid-template-rows: none;
     height: auto;
   }
+
   /* Stack all rows vertically */
   .row1,
   .row2,
@@ -88,6 +92,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: none;
   }
+
   /* Set uniform height for all rectangles on mobile */
   .cell{
     height: var(--mobile-box-height);
