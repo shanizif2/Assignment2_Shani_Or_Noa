@@ -1,0 +1,116 @@
+/* Column width system (12 columns layout) */
+.col-1  {width: 8.33%;}
+.col-2  {width: 16.66%;}
+.col-3  {width: 25%;}
+.col-4  {width: 33.33%;}
+.col-5  {width: 41.66%;}
+.col-6  {width: 50%;}
+.col-7  {width: 58.33%;}
+.col-8  {width: 66.66%;}
+.col-9  {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+ /* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+ /* Full height layout */
+body, html {
+    height: 100%;
+    padding: 5px;
+}
+ /* Default column styling */
+[class*="col-"] {
+    float: left;
+    border: 2px solid tomato;
+}
+ /* Left vertical rectangle */
+.tall {height: 100%;}
+ /* Main container */
+.bigContainer {height: 100%; padding:10px;}
+ /* First row container */
+.Row1Container {height: 33.33%; border: 0px; margin-bottom: 10px;}
+ /* Small rectangles in first row */
+.Row1SmallRect {height: 100%; width:23%;}
+ /* Margin for non-right rectangles */
+.nonRightRow1 { margin-right:2.6%;}
+/* Second row – container with two rectangles */
+.Row2Container2Rects { height: 33.33%; border: 0px; width:48.6%; margin-right:2.6%;}
+ /* Height for small rectangles in second row */
+.Row2SmallRectHeight { height: 45%;}
+ /* Spacing between stacked rectangles */
+.higherRectInRow2 { margin-bottom:2.2%;}
+/* Big rectangle in second row */
+.Row2BigRect { height: 32.33%; width:48.6%;}
+ /* Third row height */
+.Row3Height { height: 31.33%;}
+ /* Left rectangle in third row */
+.Row3LeftRect { margin-right:2.6%; width:65%;}
+/* Right rectangle in third row */
+.Row3RightRect { width:32.4%;}
+
+/* Responsive layout */
+@media screen and (max-width: 750px) {
+
+  /* Remove default spacing */
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: auto;
+  }
+
+  /* Outer frame with emphasized top border */
+  body {
+    border-top: 6px solid tomato; /* Thick top border */    
+    border-left: 2px solid tomato;
+    border-right: 2px solid tomato;
+    border-bottom: 2px solid tomato;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  /* Disable column layout for mobile */
+  [class*="col-"] {
+    float: none;
+    width: 100%;
+    height: auto;
+    border: 0; /* Remove borders from containers */      
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  /* Remove layout containers spacing */
+  .bigContainer,
+  .Row1Height,
+  .Row2Container2Rects {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    height: auto;
+    width: 100%;
+  }
+  /* All 10 rectangles – equal size and spacing */
+  .tall,
+  .Row1SmallRect,
+  .Row2SmallRectHeight,
+  .Row2BigRect,
+  .Row3LeftRect,
+  .Row3RightRect {
+    height: 120px;
+    border: 2px solid tomato;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+  /* Clear old margins */
+  .nonRightRow1,
+  .higherRectInRow2 {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+  /* Remove extra space after last rectangle */
+  .Row3RightRect {
+    margin-bottom: 0;
+  }
+}
