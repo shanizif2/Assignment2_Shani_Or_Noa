@@ -1,9 +1,9 @@
 # Assignment 2 – HTML & CSS (GitHub Pages)
 
 ## Students
-- Shani
-- Or
-- Noa
+- Shani Ziflinger
+- Or Goren
+- Noa Nahum
 
 ## Project Description
 This project demonstrates the use of HTML and CSS with different styling approaches.
@@ -32,8 +32,7 @@ a different styling method.
 
 ## GitHub Pages
 The project is deployed using GitHub Pages and can be accessed via the following link:
-
-👉 **(Paste your GitHub Pages URL here)**
+https://shanizif2.github.io/Assignment2_Shani_Or_Noa/
 
 ## How to Run Locally
 1. Download or clone the repository.
