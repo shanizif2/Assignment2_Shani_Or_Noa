@@ -1,0 +1,173 @@
+/* Global reset and layout container */
+* {box-sizing: border-box}
+html,body{height:100%}
+body{
+	margin:18px;
+	background:#ffffff;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Outer frame that matches the thick red border in reference */
+:root{
+	--sidebar-w:120px;
+	--gap:12px;
+	--outer-border:6px;
+	--inner-border:4px;
+	--top-h:110px;
+	--mid-h:56px;
+	--mid-gap:12px;
+	--bottom-h:110px;
+}
+
+.frame{
+	/* no flex or grid — plain CSS only */
+	position:relative;
+	max-width:1200px;
+	height:420px;
+	border:var(--outer-border) solid #d60000;
+	padding:10px;
+	margin:0 auto;
+	background:#fff;
+}
+
+/* Left tall sidebar (float) */
+.sidebar{
+	/* position the sidebar inside the frame using absolute positioning
+	   so we can reliably calculate the content area. This avoids floats
+	   causing vertical overflow outside the frame. */
+	position:absolute;
+	top:10px;
+	left:10px;
+	bottom:10px;
+	width:var(--sidebar-w);
+	border:var(--inner-border) solid #d60000;
+	background:#fff;
+}
+
+/* Right content area - plain positioning inside */
+.content{
+	/* content occupies the interior area (respecting frame padding)
+	   and is positioned absolutely so its 100% height is the inner height. */
+	position:absolute;
+	top:10px;
+	bottom:10px;
+	left: calc(10px + var(--sidebar-w) + var(--gap));
+	right:10px;
+	overflow:visible;
+}
+
+/* Generic box style (white card with red inner border) */
+.box{
+	background:#fff;
+	border:var(--inner-border) solid #d60000;
+	border-radius:2px;
+	padding:6px;
+}
+
+/* Top row: 4 equal boxes using floats and calc for widths */
+.top{
+	float:left;
+	height:var(--top-h);
+	/* column gap is 3 * gap */
+	width: calc((100% - (3 * var(--gap))) / 4);
+	margin-right: var(--gap);
+}
+.top:nth-of-type(4){
+	margin-right:0;
+}
+
+/* Middle layer spacing: add top margin so it isn't attached to top row */
+.mid.l1{
+	clear:left; /* start a new row below the floated top boxes */
+	margin-top: var(--gap); /* separation from the top row */
+	height: var(--mid-h); /* increased height per request */
+	/* width spanning 2 columns: 2 * col + 1 gap between them */
+	width: calc(((100% - (3 * var(--gap))) / 4) * 2 + var(--gap));
+	float:left;
+	margin-right: var(--gap);
+}
+.mid.l2{
+	clear:left;
+	margin-top: var(--mid-gap);
+	height: var(--mid-h); /* increased height */
+	width: calc(((100% - (3 * var(--gap))) / 4) * 2 + var(--gap));
+	float:left;
+	margin-right: var(--gap);
+}
+
+/* Middle-right tall box: positioned to the right and spans two middle rows */
+.mid.right{
+	position:absolute;
+	/* start below top row + small gap */
+	top: calc(var(--top-h) + var(--gap));
+	right:0;
+	height: calc(var(--mid-h) + var(--mid-gap) + var(--mid-h)); /* two mid bars + gap between them */
+	width: calc(((100% - (3 * var(--gap))) / 4) * 2 + var(--gap)); /* spans two columns on the right */
+}
+
+/* Bottom row: big box (spans 3 columns) and small box on the right */
+.bottom.big{
+	position:absolute;
+	top: calc(var(--top-h) + var(--gap) + var(--mid-h) + var(--mid-gap) + var(--mid-h) + var(--gap));
+	left:0;
+	height: var(--bottom-h);
+	/* spans 3 columns: 3 * col + 2 gaps */
+	width: calc(((100% - (3 * var(--gap))) / 4) * 3 + (2 * var(--gap)));
+}
+.bottom.small{
+	position:absolute;
+	top: calc(var(--top-h) + var(--gap) + var(--mid-h) + var(--mid-gap) + var(--mid-h) + var(--gap));
+	right:0;
+	height: var(--bottom-h);
+	width: calc((100% - (3 * var(--gap))) / 4);
+}
+
+/* Ensure box-sizing remains consistent */
+.frame, .sidebar, .content, .box { box-sizing: border-box }
+
+/* Mobile / narrow layout: stack everything vertically under 750px */
+@media (max-width:750px){
+	.frame{
+		max-width:100%;
+		height:auto;
+		padding:12px;
+	}
+
+	/* Sidebar becomes a normal block at the top */
+	.sidebar{
+		position:static;
+		width:100%;
+		height:auto;
+		margin:0 0 12px 0;
+	}
+
+	/* Content becomes normal flow so boxes stack */
+	.content{
+		position:static;
+		top:auto; bottom:auto; left:auto; right:auto;
+		margin:0; padding:0;
+	}
+
+	/* Reset floated/absolute boxes and make them full width */
+	.top, .mid.l1, .mid.l2, .mid.right, .bottom.big, .bottom.small{
+		float:none;
+		position:static;
+		width:100% !important;
+		margin:0 0 12px 0;
+		box-sizing:border-box;
+	}
+
+	/* Make boxes visually similar to the target: taller, consistent spacing */
+	.top{height:74px}
+	.mid.l1, .mid.l2{height:64px}
+	.mid.right{height:120px}
+	.bottom.big{height:92px}
+	.bottom.small{height:92px}
+
+	/* Remove extra right margins set earlier */
+	.top:nth-of-type(4){margin-right:0}
+
+	/* Ensure inner borders don't collapse at the very bottom */
+	.box{padding:8px}
+}
+
