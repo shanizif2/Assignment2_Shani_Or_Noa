@@ -1,66 +1,78 @@
-/* RESET */
+/* ========= RESET ========= */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* FRAME: sidebar + content */
+/* ========= FRAME ========= */
 .frame {
   display: flex;
+  border: 4px solid red;
+  padding: 10px;
+  min-height: 100vh;
 }
 
-/* SIDEBAR */
+/* ========= SIDEBAR ========= */
 .sidebar {
-  width: 180px;
+  flex: 0 0 180px;
   border: 3px solid red;
 }
 
-/* CONTENT */
+/* ========= CONTENT ========= */
 .content {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
-  padding: 10px;
+  gap: 10px;
+  padding-left: 10px;
 }
 
-/* ALL BOXES – BORDER ONLY */
+/* ========= ALL BOXES ========= */
 .box {
   border: 3px solid red;
-  margin: 5px;
+  min-height: 60px;
 }
 
-/* ===== TOP ROW: 4 boxes ===== */
+/* ========= TOP ROW (4 boxes) ========= */
 .top {
-  flex: 0 0 calc(25% - 10px);
-  height: 60px;
+  flex: 0 0 calc(25% - 8px);
 }
 
-/* ===== MIDDLE LEFT (stacked) ===== */
-.mid.l1,
-.mid.l2 {
-  flex: 0 0 calc(30% - 10px);
-  height: 60px;
+/* ========= MIDDLE LEFT (2 stacked) ========= */
+.l1,
+.l2 {
+  flex: 0 0 calc(50% - 5px);
 }
 
-/* ===== MIDDLE RIGHT (tall) ===== */
+/* ========= MIDDLE RIGHT (big vertical) ========= */
+.right {
+  flex: 0 0 calc(50% - 5px);
+  min-height: 140px;
+}
+
+/* ========= FORCE ROW BREAK ========= */
+.l2 {
+  margin-bottom: 10px;
+}
+
+/* ========= BIG CENTER ========= */
 .mid.right {
-  flex: 0 0 calc(40% - 10px);
-  height: 130px;
+  margin-top: -70px;
 }
 
-/* ===== BOTTOM ===== */
-.bottom.big {
-  flex: 0 0 calc(70% - 10px);
-  height: 80px;
+/* ========= BOTTOM ========= */
+.big {
+  flex: 0 0 calc(75% - 5px);
+  min-height: 90px;
 }
 
-.bottom.small {
-  flex: 0 0 calc(30% - 10px);
-  height: 80px;
+.small {
+  flex: 0 0 calc(25% - 5px);
+  min-height: 90px;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ========= RESPONSIVE ========= */
 @media (max-width: 750px) {
   .frame {
     flex-direction: column;
@@ -68,15 +80,13 @@
 
   .sidebar {
     width: 100%;
-    height: 50px;
   }
 
   .content {
-    flex-direction: column;
+    padding-left: 0;
   }
 
   .box {
-    width: 100%;
-    margin: 5px 0;
+    flex: 0 0 100% !important;
   }
 }
